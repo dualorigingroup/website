@@ -30,3 +30,8 @@ One-screen landing page for **dualorigingroup.com**, served by GitHub Pages from
 
 ## Regenerating the cup image
 `cup.png` is rendered from a private HTML source (not in this repo because it contains the contact text). The source kit lives in the **private** repo `dualorigingroup/website-assets` (`cup-source.html`, `tools/cupshot.js`, README with steps); attach it to the session to edit the cup. Never copy its contents into this public repo. Process: open the source HTML in headless Chrome at 1440×900, deviceScaleFactor 4, hide everything except the cup (lid, cup body, sleeve, stamp, names), disable animations and any glow/pseudo-elements, screenshot the cup's bounding box with 24px transparent padding and `omit_background`, resize to 1236px wide, save as `images/cup.png`, then update the `height` attribute on `<img class="cupimg">`. The image must have fully transparent edges so the page's glow fades smoothly.
+
+## Workflow
+- Develop on the session's working branch; never push to `main` directly.
+- After each change, republish the private preview artifact (https://claude.ai/artifact/KuAvVPuuUiJg3CMSHYxLaC) from a copy of `index.html` with the doctype/html/head/body wrapper tags removed, plus the `images/` files. Pass that URL to update it from a new session.
+- Merge to `main` (via pull request) **only when the owner says "merge"**. Merging to `main` publishes the live site.
