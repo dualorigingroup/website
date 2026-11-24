@@ -25,6 +25,7 @@ One-screen landing page for **dualorigingroup.com**, served by GitHub Pages from
 - Blurb lines (keep these breaks): "We build custom solutions that surface the" / "right information and keep work flowing," / "so your team can make better calls, faster."
 - Cup bottom (inside `cup.png`): phone centered under the tape, then the corgi mini ID badge — light cream card, "HEAD OF / SECURITY" then "Guards / the beans" (four short lines beside the photo, keeps the card narrow) (dog never "drinks" coffee — caffeine is toxic to dogs). Name tape and badge share the cream `#EADFCF`/`#F1E8DB` family. No "CO-FOUNDERS" label.
 - Footer: "Brewed in MA" + muted US flag, then smaller "© 2026 DOG LLC".
+- Sleeve starts ~30px below the cup rim (white band above it, like a real to-go cup); stamp ~124px so it fits the shorter sleeve.
 - Stamp on cup: "DUAL ORIGIN GROUP" top arc, "EST. 2026" bottom arc, "LET'S TALK" center, slightly rough ink, overlapping the top of the name tape (not the portraits).
 
 ## CSS note
