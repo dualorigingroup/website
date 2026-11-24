@@ -510,16 +510,34 @@ header .sub{display:block;margin-top:7px;font:600 .56rem Inter,sans-serif;letter
 .legal .cp{font-size:.86em;opacity:.7}
 footer.foot{padding-bottom:10px!important}
 @media (max-width:600px) and (max-height:700px){footer.foot{gap:6px!important;padding-bottom:8px!important}}
+/* ===== consistent vertical rhythm (all sizes) =====
+   main/.wrap/.copy flatten into body's column. The cup grows with screen height up to a width cap;
+   any height still left over is shared by the spacers (logo gap gets 2 shares, the others 1). */
+body{min-height:100vh;min-height:100svh;align-items:center;
+  --cap:min(100vw - 80px,360px);--k:420px;--g:30px;--glogo:36px;
+  --cw:max(200px,min(var(--cap),(100vh - var(--k)) / 1.05));--cw:max(200px,min(var(--cap),(100svh - var(--k)) / 1.05))}
+main,.wrap,.copy{display:contents}
+.sp{display:block;flex:1 1 var(--g);min-height:calc(var(--g) * .6)}
+.sp-logo{flex:2 1 var(--glogo);min-height:calc(var(--glogo) * .6)}
+.sp-lid{flex-basis:calc(var(--g) + var(--cw) * .037);min-height:calc(var(--g) * .6 + var(--cw) * .037)}
+.mugwrap{width:var(--cw)!important;max-width:none!important;margin:0!important;flex:none}
+footer.foot{padding-top:0!important}
+@media (min-width:601px){body{--cap:420px;--k:532px;--g:36px;--glogo:48px}}
+@media (min-width:601px) and (max-height:820px){body{--k:466px;--g:28px;--glogo:36px}}
+@media (max-width:600px) and (max-height:700px){body{--k:402px;--g:26px;--glogo:32px}}
 </style>
 </head>
 <body>
 <header><svg aria-hidden="true" width="90" height="67" viewBox="-54 -40 108 80"><g class="bA"><path transform="translate(-22 3) rotate(-24)" d="M0-30C17-30 26-14 26 0S17 30 0 30-26 14-26 0-17-30 0-30z" fill="#C8692A"/><path transform="translate(-22 3) rotate(-24)" d="M0-26C-8-14 8-6 0 2S-8 18 0 26" fill="none" stroke="#1A1310" stroke-width="4.5" stroke-linecap="round"/></g><g class="bB"><path transform="translate(15 -2) rotate(20) scale(1.04)" d="M0-30C17-30 26-14 26 0S17 30 0 30-26 14-26 0-17-30 0-30z" fill="#F3E7DA" stroke="#1A1310" stroke-width="4" paint-order="stroke"/><path transform="translate(15 -2) rotate(20) scale(1.04)" d="M0-26C-8-14 8-6 0 2S-8 18 0 26" fill="none" stroke="#1A1310" stroke-width="4.5" stroke-linecap="round"/></g></svg><img class="wordmark" src="images/wordmark-light.png" alt="Dual Origin Group" width="340" height="19"><span class="sub">Consultants</span></header>
+<i class="sp sp-logo" aria-hidden="true"></i>
 <main>
 <div class="wrap"><div class="copy"><h1>Bottlenecks brewing?</h1>
 <p class="tag"><span class="l">We build custom solutions that surface the</span> <span class="l">right information and keep work flowing,</span> <span class="l">so your team can make better calls, faster.</span></p>
+<i class="sp sp-lid" aria-hidden="true"></i>
 <div class="mugwrap"><div class="spill" aria-hidden="true"><u style="--w:110px;--img:url(images/steam-1.png);--sx:55px;--dx:-6vw;--d:10.2s;--delay:-7.5s;--o:0.30;--k:7"></u><u style="--w:110px;--img:url(images/steam-3.png);--sx:31px;--dx:-12vw;--d:12.1s;--delay:-6.4s;--o:0.28;--k:-4"></u><u style="--w:150px;--img:url(images/steam-3.png);--sx:-39px;--dx:16vw;--d:12.7s;--delay:-12.7s;--o:0.28;--k:4"></u><u style="--w:130px;--img:url(images/steam-1.png);--sx:-27px;--dx:-6vw;--d:12.6s;--delay:-4.3s;--o:0.28;--k:-3"></u><u style="--w:110px;--img:url(images/steam-1.png);--sx:71px;--dx:-11vw;--d:11.4s;--delay:-0.8s;--o:0.22;--k:0"></u><u style="--w:110px;--img:url(images/steam-2.png);--sx:81px;--dx:10vw;--d:9.3s;--delay:-5.0s;--o:0.29;--k:8"></u><u style="--w:110px;--img:url(images/steam-2.png);--sx:14px;--dx:-7vw;--d:11.3s;--delay:-1.1s;--o:0.26;--k:3"></u><b class="ink" style="--s:13px;--sx:79px;--dx:23vw;--rise:59vh;--d:10.2s;--delay:-1.4s;--o:0.27;--j:2.4s;--r:9deg"><i></i></b><b class="" style="--s:19px;--sx:-102px;--dx:-13vw;--rise:58vh;--d:7.4s;--delay:-1.7s;--o:0.37;--j:2.2s;--r:31deg"><i></i></b><b class="" style="--s:22px;--sx:-3px;--dx:-36vw;--rise:82vh;--d:10.2s;--delay:-2.9s;--o:0.42;--j:2.5s;--r:-40deg"><i></i></b><b class="ink" style="--s:17px;--sx:-39px;--dx:-21vw;--rise:66vh;--d:10.5s;--delay:-1.1s;--o:0.33;--j:1.9s;--r:-16deg"><i></i></b><b class="" style="--s:13px;--sx:76px;--dx:42vw;--rise:52vh;--d:10.0s;--delay:-9.7s;--o:0.33;--j:2.2s;--r:46deg"><i></i></b><b class="" style="--s:17px;--sx:37px;--dx:-12vw;--rise:47vh;--d:10.1s;--delay:-6.7s;--o:0.40;--j:2.8s;--r:49deg"><i></i></b><b class="ink" style="--s:13px;--sx:-13px;--dx:37vw;--rise:85vh;--d:8.2s;--delay:-6.8s;--o:0.28;--j:1.9s;--r:25deg"><i></i></b><b class="" style="--s:13px;--sx:45px;--dx:-42vw;--rise:60vh;--d:8.3s;--delay:-1.4s;--o:0.33;--j:2.8s;--r:21deg"><i></i></b><b class="" style="--s:15px;--sx:65px;--dx:11vw;--rise:59vh;--d:10.4s;--delay:-8.6s;--o:0.41;--j:2.0s;--r:-52deg"><i></i></b><b class="ink" style="--s:22px;--sx:73px;--dx:21vw;--rise:76vh;--d:8.1s;--delay:-3.2s;--o:0.43;--j:2.0s;--r:-27deg"><i></i></b><b class="" style="--s:22px;--sx:27px;--dx:35vw;--rise:82vh;--d:7.7s;--delay:-3.1s;--o:0.29;--j:2.8s;--r:5deg"><i></i></b><b class="" style="--s:13px;--sx:110px;--dx:-17vw;--rise:85vh;--d:9.5s;--delay:-1.5s;--o:0.39;--j:2.2s;--r:-11deg"><i></i></b><b class="ink" style="--s:19px;--sx:25px;--dx:43vw;--rise:45vh;--d:8.9s;--delay:-6.1s;--o:0.27;--j:2.6s;--r:36deg"><i></i></b><b class="" style="--s:17px;--sx:-82px;--dx:35vw;--rise:55vh;--d:8.3s;--delay:-3.8s;--o:0.44;--j:2.6s;--r:-27deg"><i></i></b><b class="" style="--s:15px;--sx:19px;--dx:-27vw;--rise:85vh;--d:11.9s;--delay:-6.0s;--o:0.29;--j:1.9s;--r:-40deg"><i></i></b><b class="ink" style="--s:22px;--sx:-110px;--dx:39vw;--rise:46vh;--d:9.7s;--delay:-1.1s;--o:0.32;--j:2.8s;--r:43deg"><i></i></b></div><div class="cupsteam" aria-hidden="true"><i></i><i></i><i></i></div><img class="cupimg" src="images/cup.png" width="1236" height="1176" alt="Contact card for Sam and Gio, co-founders of Dual Origin Group"></div>
 </div></div></div>
 </main>
+<i class="sp" aria-hidden="true"></i>
 <footer class="foot">
 <div class="idb" aria-label="Head of Security staff badge"><i class="slot" aria-hidden="true"></i><span class="ph"><img src="images/corgi.png" alt="Our corgi, the Dual Origin Group mascot"></span><span class="t"><b>Head of Security</b><small>Guards the beans</small></span></div>
 <p class="legal"><span class="made">Brewed in MA<svg class="flag" width="20" height="13" viewBox="0 0 19 10" aria-hidden="true"><rect width="19" height="10" fill="#B22234"/><path d="M0 1.15h19M0 2.7h19M0 4.23h19M0 5.77h19M0 7.3h19M0 8.85h19" stroke="#fff" stroke-width=".77"/><rect width="7.6" height="5.38" fill="#3C3B6E"/><g fill="#fff"><circle cx="1.3" cy="1" r=".35"/><circle cx="3.8" cy="1" r=".35"/><circle cx="6.3" cy="1" r=".35"/><circle cx="2.55" cy="2.2" r=".35"/><circle cx="5.05" cy="2.2" r=".35"/><circle cx="1.3" cy="3.4" r=".35"/><circle cx="3.8" cy="3.4" r=".35"/><circle cx="6.3" cy="3.4" r=".35"/><circle cx="2.55" cy="4.6" r=".35"/><circle cx="5.05" cy="4.6" r=".35"/></g></svg></span><span class="cp">&copy; 2026 DOG LLC</span></p>
