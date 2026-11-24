@@ -23,7 +23,7 @@ One-screen landing page for **dualorigingroup.com**, served by GitHub Pages from
 - Fonts: Lora (headline, wordmark), Inter (body/UI), via Google Fonts.
 - Layout top→bottom: two-bean logo (per-bean jiggle) + wordmark + "CONSULTANTS" → h1 "Bottlenecks brewing?" → 3-line blurb (fixed line breaks via `.tag .l` spans, `white-space:nowrap`) → cup image with beans funneling in and steam behind → footer.
 - Blurb lines (keep these breaks): "We build custom solutions that surface the" / "right information and keep work flowing," / "so your team can make better calls, faster."
-- Cup bottom (inside `cup.png`): phone centered under the tape, then the corgi mini ID badge — light cream card, "HEAD OF / SECURITY", "Guards the" + two small brown beans (dog never "drinks" coffee — caffeine is toxic to dogs). Name tape and badge share the cream `#EADFCF`/`#F1E8DB` family. No "CO-FOUNDERS" label.
+- Cup bottom (inside `cup.png`): phone centered under the tape, then the corgi mini ID badge — light cream card, "HEAD OF / SECURITY" then "Guards / the beans" (four short lines beside the photo, keeps the card narrow) (dog never "drinks" coffee — caffeine is toxic to dogs). Name tape and badge share the cream `#EADFCF`/`#F1E8DB` family. No "CO-FOUNDERS" label.
 - Footer: "Brewed in MA" + muted US flag, then smaller "© 2026 DOG LLC".
 - Stamp on cup: "DUAL ORIGIN GROUP" top arc, "EST. 2026" bottom arc, "LET'S TALK" center, slightly rough ink, overlapping the top of the name tape (not the portraits).
 
