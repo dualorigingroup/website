@@ -534,7 +534,7 @@ footer.foot{padding-top:0!important}
 .mugwrap .cupbox .cupimg{width:100%;margin:0}
 .mailbtn{position:absolute;z-index:3;width:11%;aspect-ratio:1;transform:translate(-50%,-50%);padding:0;border:0;border-radius:50%;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .mailbtn::after{content:"";position:absolute;inset:25%;border-radius:50%;box-shadow:0 0 0 0 rgba(243,231,218,0);transition:box-shadow .2s}
-.mailbtn:hover::after{box-shadow:0 0 0 3px rgba(243,231,218,.55)}
+@media (hover:hover) and (pointer:fine){.mailbtn:hover::after{box-shadow:0 0 0 3px rgba(243,231,218,.55)}}
 .mailbtn:focus-visible{outline:none}.mailbtn:focus-visible::after{box-shadow:0 0 0 3px #F3E7DA}
 .toast{position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom));transform:translate(-50%,8px);z-index:20;max-width:calc(100vw - 32px);
   padding:9px 16px;border-radius:999px;background:#F3E7DA;color:#2E211A;font:600 .82rem Inter,system-ui,sans-serif;box-shadow:0 8px 24px -8px rgba(0,0,0,.7);
@@ -542,9 +542,9 @@ footer.foot{padding-top:0!important}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 @media (prefers-reduced-motion:reduce){.toast,.mailbtn::after{transition:none}}
 /* phone icon in the stamp reveals the corgi's speech bubble (number is an image only) */
-.telbtn{position:absolute;z-index:3;width:9%;aspect-ratio:1;transform:translate(-50%,-50%);padding:0;border:0;border-radius:50%;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.telbtn{outline:none;position:absolute;z-index:3;width:9%;aspect-ratio:1;transform:translate(-50%,-50%);padding:0;border:0;border-radius:50%;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .telbtn::after{content:"";position:absolute;inset:-2%;border-radius:50%;box-shadow:0 0 0 0 rgba(142,58,20,0);transition:box-shadow .2s}
-.telbtn:hover::after,.telbtn[aria-expanded="true"]::after{box-shadow:0 0 0 3px rgba(142,58,20,.28)}
+
 .telbtn:focus-visible{outline:none}.telbtn:focus-visible::after{box-shadow:0 0 0 3px #F3E7DA}
 .bubimg{position:absolute;z-index:3;height:auto;max-width:none;pointer-events:none}
 .bubimg[hidden]{display:none}.bubimg picture,.bubimg img{display:block;width:100%;height:auto}
