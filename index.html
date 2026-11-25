@@ -516,7 +516,7 @@ footer.foot{padding-bottom:10px!important}
    any height still left over is shared by the spacers (logo gap gets 2 shares, the others 1). */
 body{min-height:100vh;min-height:100svh;align-items:center;
   --cap:min(100vw - 80px,360px);--k:303px;--g:30px;--glogo:36px;
-  --cw:max(200px,min(var(--cap),(100vh - var(--k)) / 1.33));--cw:max(200px,min(var(--cap),(100svh - var(--k)) / 1.33))}
+  --cw:max(96px,min(var(--cap),(100vh - var(--k)) / 1.33));--cw:max(96px,min(var(--cap),(100svh - var(--k)) / 1.33))}
 main,.wrap,.copy{display:contents}
 .sp{display:block;flex:1 1 var(--g);min-height:calc(var(--g) * .6)}
 .sp-logo{flex:2 1 var(--glogo);min-height:calc(var(--glogo) * .6)}
@@ -552,6 +552,28 @@ footer.foot{padding-top:0!important}
 .bubimg.pop{animation:bubpop .22s cubic-bezier(.3,1.4,.5,1) both}
 @keyframes bubpop{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.bubimg.pop{animation:none}.telbtn::after{transition:none}}
+/* ===== short / narrow screens: compact header + text so nothing scrolls ===== */
+@media (max-width:600px){h1{font-size:min(2rem,8.6vw)!important}}
+@media (max-height:619px){
+  header svg{width:50px!important;height:37px!important}
+  .wordmark{width:min(210px,60vw)!important}
+  header .sub{margin-top:5px!important;font-size:.5rem!important}
+  h1{font-size:min(1.6rem,7.4vw)!important}
+  .tag{font-size:min(.8rem,3.9vw)!important;line-height:1.35!important}
+  .copy .tag{margin-top:6px!important}
+  body{--g:16px;--glogo:20px;--k:236px}
+}
+@media (max-height:619px) and (min-width:601px){header{padding-top:12px!important}}
+@media (max-height:460px){
+  header{padding-top:6px!important;gap:3px!important}
+  header svg{width:34px!important;height:25px!important}
+  .wordmark{width:150px!important}
+  header .sub{display:none!important}
+  h1{font-size:1.2rem!important}
+  .tag{font-size:.66rem!important;line-height:1.3!important}
+  .copy .tag{margin-top:4px!important}
+  body{--g:10px;--glogo:12px;--k:144px}
+}
 </style>
 </head>
 <body>
