@@ -613,13 +613,13 @@ footer.foot{padding-top:0!important}
   var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   function bshow(txt){bmt.innerHTML=txt;bm.hidden=false;bm.classList.remove('out','pop');void bm.offsetWidth;bm.classList.add('pop')}
   function bhide(cb){if(RM){bm.hidden=true;cb&&cb();return}bm.classList.remove('pop');bm.classList.add('out');bt=setTimeout(function(){bm.hidden=true;bm.classList.remove('out');cb&&cb()},170)}
-  function corgiSay(msgs){if(!bm)return false;clearTimeout(bt);var b2=document.getElementById('bub');if(b2&&!b2.hidden&&typeof showBub==='function')showBub(false);
-    var i=0;(function next(){if(i>=msgs.length){bhide();return}var m=msgs[i++];var go=function(){bshow(m);t.textContent=m.replace(/<br>/g,' ');bt=setTimeout(function(){i<msgs.length?bhide(next):bhide()},i<msgs.length?1700:2200)};bm.hidden?go():bhide(go)})();return true}
+  function corgiSay(msgs,onDone){if(!bm)return false;clearTimeout(bt);var b2=document.getElementById('bub');if(b2&&!b2.hidden&&typeof showBub==='function')showBub(false);
+    var i=0;(function next(){if(i>=msgs.length){bhide(onDone);return}var m=msgs[i++];var go=function(){bshow(m);t.textContent=m.replace(/<br>/g,' ');bt=setTimeout(function(){i<msgs.length?bhide(next):bhide(onDone)},i<msgs.length?1700:2200)};bm.hidden?go():bhide(go)})();return true}
   function say(m){t.textContent=m;t.classList.add('on');clearTimeout(tid);tid=setTimeout(function(){t.classList.remove('on')},3200)}
   var mt;/* the mail app opens only after the corgi has spoken, so visitors see the bubbles */
   document.querySelectorAll('.mailbtn').forEach(function(b){b.addEventListener('click',function(){
     var p=b.getAttribute('data-p'),x=a(p),fired=false,done=function(ok){if(fired)return;fired=true;var open='Special<br>delivery!';
-      if(!corgiSay(ok?['Fetched<br>'+N[p]+'’s email!',open]:[open]))say(ok?N[p]+'’s email copied. Opening your mail app…':'Opening your mail app…');
+      autoPause('email');if(!corgiSay(ok?['Fetched<br>'+N[p]+'’s email!',open]:[open],autoResume))say(ok?N[p]+'’s email copied. Opening your mail app…':'Opening your mail app…');
       clearTimeout(mt);mt=setTimeout(function(){window.location.href='mai'+'lto:'+x},ok?2300:900)};
     try{navigator.clipboard.writeText(x).then(function(){done(true)},function(){done(false)})}catch(e){done(false)}
   })});
@@ -627,16 +627,34 @@ footer.foot{padding-top:0!important}
   /* bubble images (the only place the phone number exists) load on first use */
   function lazy(root){root.querySelectorAll('[data-srcset]').forEach(function(e){e.srcset=e.getAttribute('data-srcset');e.removeAttribute('data-srcset')});
     root.querySelectorAll('img[data-src]').forEach(function(e){e.src=e.getAttribute('data-src');e.removeAttribute('data-src')})}
-  function showBub(on){if(on){lazy(bub);if(bm&&!bm.hidden){clearTimeout(bt);bm.hidden=true}}bub.hidden=!on;tb.setAttribute('aria-expanded',on?'true':'false');tb.setAttribute('aria-label',on?'Hide phone number':'Show phone number');
+  var pt;function showBub(on){clearTimeout(pt);if(on){autoPause('phone');lazy(bub);if(bm&&!bm.hidden){clearTimeout(bt);bm.hidden=true;bm.classList.remove('pop','out')}pt=setTimeout(function(){if(!bub.hidden)showBub(false)},10000)}else if(amode==='phone'){autoResume()}bub.hidden=!on;tb.setAttribute('aria-expanded',on?'true':'false');tb.setAttribute('aria-label',on?'Hide phone number':'Show phone number');
     bub.classList.remove('pop');if(on){void bub.offsetWidth;bub.classList.add('pop')}}
   if(tb&&bub){tb.addEventListener('click',function(e){e.stopPropagation();showBub(bub.hidden)});
     document.addEventListener('click',function(){if(!bub.hidden)showBub(false)});
     tb.addEventListener('pointerenter',function(){lazy(bub)});tb.addEventListener('touchstart',function(){lazy(bub)},{passive:true});
     document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!bub.hidden){showBub(false);tb.focus()}})}
   var db=document.querySelector('.dogbtn');
-  var DQ=['Bottlenecks?<br>Sniffed out!','Less waiting,<br>more wagging.','Costs up?<br>Let’s dig in.','Better calls,<br>fetched fast.','Ruff process?<br>We can help.','Paws on cost,<br>eyes on flow.'],dbag=[],dlast=-1;
-  function dnext(){if(!dbag.length){dbag=DQ.map(function(_,i){return i});for(var i=dbag.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=dbag[i];dbag[i]=dbag[j];dbag[j]=t}if(dbag[dbag.length-1]===dlast&&dbag.length>1){var t2=dbag[0];dbag[0]=dbag[dbag.length-1];dbag[dbag.length-1]=t2}}dlast=dbag.pop();return DQ[dlast]}
-  if(db)db.addEventListener('click',function(e){e.stopPropagation();corgiSay([dnext()])});
+  /* Pao Pao auto-cycles short business pitches; phone and email take over and then hand back */
+  var DQ=["Bottlenecks?<br>Sniffed out!", "Less waiting,<br>more wagging.", "Costs up?<br>Let’s dig in.", "Better calls,<br>fetched fast.", "Ruff process?<br>We can help.", "Spreadsheet<br>chaos? Sit.", "Data all over?<br>Let’s fetch it.", "Process maze?<br>Sniffed a path.", "Flow ruff?<br>Smoothed out.", "Wasted steps?<br>Bury ’em.", "Busywork?<br>Let’s leash it.", "Old process?<br>New tricks!", "Silos?<br>Let’s herd ’em.", "Clunky steps?<br>Paw-lished!", "Messy steps?<br>Groomed!"],dbag=[],dlast=-1,amode='auto',at,ast;
+  var drecent=[];/* shuffle-bag: every line once per round, and none of the last 10 shown can start the next round */
+  function dnext(){if(!dbag.length){dbag=DQ.map(function(_,i){return i});for(var i=dbag.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),x=dbag[i];dbag[i]=dbag[j];dbag[j]=x}var fresh=dbag.filter(function(k){return drecent.indexOf(k)<0}),old=dbag.filter(function(k){return drecent.indexOf(k)>=0});dbag=old.concat(fresh)}dlast=dbag.pop();drecent.push(dlast);if(drecent.length>10)drecent.shift();return DQ[dlast]}
+  function autoShow(){if(amode!=='auto'||!bm)return;var m=dnext();var go=function(){if(amode!=='auto')return;bshow(m)};bm.hidden?go():bhide(go)}
+  function autoTick(){clearTimeout(at);if(amode!=='auto')return;if(!document.hidden)autoShow();at=setTimeout(autoTick,3000)}
+  function autoPause(mode){amode=mode;clearTimeout(at);clearTimeout(ast);clearTimeout(bt);if(bm){bm.hidden=true;bm.classList.remove('pop','out')}}
+  function autoResume(){if(amode==='auto')return;amode='auto';clearTimeout(at);clearTimeout(ast);ast=setTimeout(autoTick,900)}
+  if(bm)ast=setTimeout(autoTick,1800);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden&&amode==='auto'){clearTimeout(at);at=setTimeout(autoTick,600)}});
+  if(db)db.addEventListener('click',function(e){e.stopPropagation();if(!bub.hidden)showBub(false);if(amode!=='auto')return;autoTick()});
+  /* keep open tabs current: re-check the page itself every 5 min (and on return to the tab); reload when a new version is published */
+  var ubase=null,ulast=0,ubusy=false,ureload=false;
+  function uhash(x){var h=0;for(var i=0;i<x.length;i++)h=(h*31+x.charCodeAt(i))|0;return h}
+  function uidle(){return amode==='auto'&&(!bub||bub.hidden)}
+  function utry(){if(!ureload)return;if(document.hidden)return;if(uidle())location.reload();else setTimeout(utry,3000)}
+  function ucheck(){if(ubusy||!window.fetch)return;ubusy=true;ulast=Date.now();
+    fetch(location.pathname+'?_='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():null}).then(function(x){ubusy=false;if(x==null)return;var k=uhash(x);if(ubase===null){ubase=k;return}if(k!==ubase){ureload=true;utry()}},function(){ubusy=false})}
+  if(/(^|\.)dualorigingroup\.com$|^localhost$|^127\.0\.0\.1$/.test(location.hostname)){
+  ucheck();setInterval(function(){if(!document.hidden)ucheck()},300000);
+    document.addEventListener('visibilitychange',function(){if(document.hidden)return;if(ureload)utry();else if(Date.now()-ulast>60000)ucheck()});}
 })();
 </script>
 </body>
