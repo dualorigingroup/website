@@ -516,7 +516,7 @@ footer.foot{padding-bottom:10px!important}
    any height still left over is shared by the spacers (logo gap gets 2 shares, the others 1). */
 body{min-height:100vh;min-height:100svh;align-items:center;
   --cap:min(100vw - 80px,360px);--k:303px;--g:30px;--glogo:36px;
-  --cw:max(200px,min(var(--cap),(100vh - var(--k)) / 1.33));--cw:max(200px,min(var(--cap),(100svh - var(--k)) / 1.33))}
+  --cw:max(96px,min(var(--cap),(100vh - var(--k)) / 1.33));--cw:max(96px,min(var(--cap),(100svh - var(--k)) / 1.33))}
 main,.wrap,.copy{display:contents}
 .sp{display:block;flex:1 1 var(--g);min-height:calc(var(--g) * .6)}
 .sp-logo{flex:2 1 var(--glogo);min-height:calc(var(--glogo) * .6)}
@@ -528,7 +528,7 @@ footer.foot{padding-top:0!important}
 @media (max-width:600px) and (max-height:700px){body{--k:292px;--g:26px;--glogo:32px}}
 /* ===== cup: wrapper, instant blurred placeholder, email hotspots ===== */
 .mugwrap .cupbox{display:block;position:relative;z-index:2;width:121.18%;margin:-7.06% 0 -7.06% -10.59%;
-  background:url(data:image/webp;base64,UklGRt4CAABXRUJQVlA4WAoAAAAQAAAAHwAAJQAAQUxQSHcBAAANkFhte5otz/umX5sUd3dbgBVgDkbzKVjhXwB3d2tSex+kPbwjRMQEQKoKgKA9t1OxbN8fdSCAaaLE03uCAHrwcsR62XpvAOcvT8vm5LX9SsDelMlWdO/VowqIfbz+XNu2EYAwEuvV7hoCsO+68eXWlV0q+F8BQPt293Dg9weXdsD7+72otEE36mST1QIrSOLEjErAgbWIC9lrEGIak8CXpQqEWG5UXGh9EkDmnBS+llMgZC5RxIXMsSJgXQrwnUsrAK0kdbIuKQDrkooLLbcLuRX4sosBoJVY+chUkgCwnILTnJMCtNKKD5gbBcCyqSgOlGmMApC91gJPDlYLABZpnAo3/9hojYgD2WsQgBinqPC0vlIAkKlvVBxofRP4z1ySwJM5ruSo4kDL7QIstwJPy0kBgNalymVeAXMSF3Yrc25FHMi8Yl2q4ChTbhdoQ6MesNIsgF0T6CDzkOQf8tsvmINi25INj+98poPs3StY5Pf7GZ4xAAAAVlA4IEABAAAwBwCdASogACYAPs1MoUuno6MhtVgIAPAZiWIAv+8t44H7dwxEpPD+ZXfwwz1ipwhKd8kpbgGFskNlakZAdnU+SQAA/vM4K0yZPsH3gBDA81dK/Jnw8OyMWNBAaa3Gn6Rvt8rqs/rAfkUu2ZCPZ19gg3zVLOCSeyZyNSiEK5Oo7z1TL4h38dMRKjWXWfrfvD8M3aDIUUDd7NVBg9nVAD+sz4YlfFZw3bia/P9+SRiWOVWhos8lk8zcvRTa2OIFVsV8iTqWAKeWgwLGyEfgvGX4TWw0C1AM0ZLB67/E2hxRnOU85WfD9eMTIy7cHQuxF1MKWILkcmAHktQIPRthkXK3FTKXzH7rZStYc4OS7Ebsy3JVglr//XGf+av4J2/Q4X2NhPtX78ongEMyXWuQqjj07KF49seIz8CsA99bgAAAAA==) 0 0/100% 100% no-repeat}
+  background:url(data:image/webp;base64,UklGRuoCAABXRUJQVlA4WAoAAAAQAAAAHwAAJQAAQUxQSHcBAAANkFhte5otz/umX5sUd3dbgBVgDkbzKVjhXwB3d2tSex+kPbwjRMQEQKoKgKA9t1OxbN8fdSCAaaLE03uCAHrwcsR62XpvAOcvT8vm5LX9SsDelMlWdO/VowqIfbz+XNu2EYAwEuvV7hoCsO+68eXWlV0q+F8BQPt293Dg9weXdsD7+72otEE36mST1QIrSOLEjErAgbWIC9lrEGIak8CXpQqEWG5UXGh9EkDmnBS+llMgZC5RxIXMsSJgXQrwnUsrAK0kdbIuKQDrkooLLbcLuRX4sosBoJVY+chUkgCwnILTnJMCtNKKD5gbBcCyqSgOlGmMApC91gJPDlYLABZpnAo3/9hojYgD2WsQgBinqPC0vlIAkKlvVBxofRP4z1ySwJM5ruSo4kDL7QIstwJPy0kBgNalymVeAXMSF3Yrc25FHMi8Yl2q4ChTbhdoQ6MesNIsgF0T6CDzkOQf8tsvmINi25INj+98poPs3StY5Pf7GZ4xAAAAVlA4IEwBAAAwBwCdASogACYAPs1SoEunpKMhtVgIAPAZiWYAeSxDyUoZ6SrpsQ+qguEOicBMqGuJ/kYOEypzjhl8L1prt5+bBAAA/vGEsQ4K8q9kckJawx+wM8k9R8bM1Gp/qBcdOosKimw9GwuoC0JhCWw9qDTMSY1TZXNQt+jGh77fu6nE6xjruq2LhE9lYsFrdGMTgMUpX2x4PbTABJBdUguiz6Aoyhh/tgO0mSLk6gPMXEAAhfd/f5sCjt0THSrkrQMw07DY/cNL00aRwOPHdWyruj5tE3RQpZsFZkUXauqdjgk+jmmqVYT/huhQRc9i603AGXQ67ZEXMeUUkJUIe2OQNd4XTAkHFfdqI5cD1j+YZfAR5ffYCa74gfK7De4+B15zmU1//YFT/Av8E7fotD2JIKO//2ZTA1iCqj6DM5U30yrSUuGOB7oxYu/FMkAAAA==) 0 0/100% 100% no-repeat}
 .mugwrap .cupbox.ready{background:none}
 .mugwrap .cupbox picture{display:block}
 .mugwrap .cupbox .cupimg{width:100%;margin:0}
@@ -552,6 +552,28 @@ footer.foot{padding-top:0!important}
 .bubimg.pop{animation:bubpop .22s cubic-bezier(.3,1.4,.5,1) both}
 @keyframes bubpop{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.bubimg.pop{animation:none}.telbtn::after{transition:none}}
+/* ===== short / narrow screens: compact header + text so nothing scrolls ===== */
+@media (max-width:600px){h1{font-size:min(2rem,8.6vw)!important}}
+@media (max-height:619px){
+  header svg{width:50px!important;height:37px!important}
+  .wordmark{width:min(210px,60vw)!important}
+  header .sub{margin-top:5px!important;font-size:.5rem!important}
+  h1{font-size:min(1.6rem,7.4vw)!important}
+  .tag{font-size:min(.8rem,3.9vw)!important;line-height:1.35!important}
+  .copy .tag{margin-top:6px!important}
+  body{--g:16px;--glogo:20px;--k:236px}
+}
+@media (max-height:619px) and (min-width:601px){header{padding-top:12px!important}}
+@media (max-height:460px){
+  header{padding-top:6px!important;gap:3px!important}
+  header svg{width:34px!important;height:25px!important}
+  .wordmark{width:150px!important}
+  header .sub{display:none!important}
+  h1{font-size:1.2rem!important}
+  .tag{font-size:.66rem!important;line-height:1.3!important}
+  .copy .tag{margin-top:4px!important}
+  body{--g:10px;--glogo:12px;--k:144px}
+}
 </style>
 </head>
 <body>
