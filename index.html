@@ -613,7 +613,7 @@ footer.foot{padding-top:0!important}
     var i=0;(function next(){if(i>=msgs.length){bhide();return}var m=msgs[i++];var go=function(){bshow(m);t.textContent=m.replace(/<br>/g,' ');bt=setTimeout(function(){i<msgs.length?bhide(next):bhide()},i<msgs.length?1700:2200)};bm.hidden?go():bhide(go)})();return true}
   function say(m){t.textContent=m;t.classList.add('on');clearTimeout(tid);tid=setTimeout(function(){t.classList.remove('on')},3200)}
   document.querySelectorAll('.mailbtn').forEach(function(b){b.addEventListener('click',function(){
-    var p=b.getAttribute('data-p'),x=a(p),done=function(ok){var open='Paws…<br>opening mail.';if(!corgiSay(ok?['Fetched<br>'+N[p]+'’s email!',open]:[open]))say(ok?N[p]+'’s email copied. Opening your mail app…':'Opening your mail app…')};
+    var p=b.getAttribute('data-p'),x=a(p),done=function(ok){var open='Special<br>delivery!';if(!corgiSay(ok?['Fetched<br>'+N[p]+'’s email!',open]:[open]))say(ok?N[p]+'’s email copied. Opening your mail app…':'Opening your mail app…')};
     try{navigator.clipboard.writeText(x).then(function(){done(true)},function(){done(false)})}catch(e){done(false)}
     window.location.href='mai'+'lto:'+x;
   })});
