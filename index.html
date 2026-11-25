@@ -586,6 +586,12 @@ footer.foot{padding-top:0!important}
 .dogbtn{position:absolute;z-index:3;padding:0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;transform:rotate(-2deg)}
 .dogbtn:focus{outline:none}.dogbtn:focus-visible{outline:2px solid #F3E7DA;outline-offset:2px;border-radius:4px}
 @media (max-width:600px){.bubmsg{left:3.015%!important;top:66.997%!important;width:36.718%!important}}
+/* softer, matching pop-in / pop-out for the corgi bubbles (out ~0.3s, short pause, in ~0.42s) */
+@keyframes bubpop2{0%{opacity:0;transform:scale(.72) translateY(4px)}70%{opacity:1;transform:scale(1.03)}100%{opacity:1;transform:none}}
+@keyframes bubout2{0%{opacity:1;transform:none}100%{opacity:0;transform:scale(.8) translateY(3px)}}
+.bubimg.pop,.bubmsg.pop{animation:bubpop2 .42s cubic-bezier(.22,.9,.32,1) both!important}
+.bubmsg.out{animation:bubout2 .3s cubic-bezier(.55,0,.75,.4) both!important}
+@media (prefers-reduced-motion:reduce){.bubimg.pop,.bubmsg.pop,.bubmsg.out{animation:none!important}}
 </style>
 </head>
 <body>
@@ -612,7 +618,7 @@ footer.foot{padding-top:0!important}
   var bm=document.querySelector('.bubmsg'),bmt=bm&&bm.querySelector('.bmt'),bq=[],bt;
   var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   function bshow(txt){bmt.innerHTML=txt;bm.hidden=false;bm.classList.remove('out','pop');void bm.offsetWidth;bm.classList.add('pop')}
-  function bhide(cb){if(RM){bm.hidden=true;cb&&cb();return}bm.classList.remove('pop');bm.classList.add('out');bt=setTimeout(function(){bm.hidden=true;bm.classList.remove('out');cb&&cb()},170)}
+  function bhide(cb){if(RM){bm.hidden=true;cb&&cb();return}bm.classList.remove('pop');bm.classList.add('out');bt=setTimeout(function(){bm.hidden=true;bm.classList.remove('out');cb&&cb()},360)}
   function corgiSay(msgs,onDone){if(!bm)return false;clearTimeout(bt);var b2=document.getElementById('bub');if(b2&&!b2.hidden&&typeof showBub==='function')showBub(false);
     var i=0;(function next(){if(i>=msgs.length){bhide(onDone);return}var m=msgs[i++];var go=function(){bshow(m);t.textContent=m.replace(/<br>/g,' ');bt=setTimeout(function(){i<msgs.length?bhide(next):bhide(onDone)},i<msgs.length?1700:2200)};bm.hidden?go():bhide(go)})();return true}
   function say(m){t.textContent=m;t.classList.add('on');clearTimeout(tid);tid=setTimeout(function(){t.classList.remove('on')},3200)}
@@ -620,7 +626,7 @@ footer.foot{padding-top:0!important}
   document.querySelectorAll('.mailbtn').forEach(function(b){b.addEventListener('click',function(){
     var p=b.getAttribute('data-p'),x=a(p),fired=false,done=function(ok){if(fired)return;fired=true;var open='Special<br>delivery!';
       autoPause('email');if(!corgiSay(ok?['Fetched<br>'+N[p]+'’s email!',open]:[open],autoResume))say(ok?N[p]+'’s email copied. Opening your mail app…':'Opening your mail app…');
-      clearTimeout(mt);mt=setTimeout(function(){window.location.href='mai'+'lto:'+x},ok?2300:900)};
+      clearTimeout(mt);mt=setTimeout(function(){window.location.href='mai'+'lto:'+x},ok?2700:1000)};
     try{navigator.clipboard.writeText(x).then(function(){done(true)},function(){done(false)})}catch(e){done(false)}
   })});
   var tb=document.querySelector('.telbtn'),bub=document.getElementById('bub');
@@ -639,7 +645,7 @@ footer.foot{padding-top:0!important}
   var drecent=[];/* shuffle-bag: every line once per round, and none of the last 10 shown can start the next round */
   function dnext(){if(!dbag.length){dbag=DQ.map(function(_,i){return i});for(var i=dbag.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),x=dbag[i];dbag[i]=dbag[j];dbag[j]=x}var fresh=dbag.filter(function(k){return drecent.indexOf(k)<0}),old=dbag.filter(function(k){return drecent.indexOf(k)>=0});dbag=old.concat(fresh)}dlast=dbag.pop();drecent.push(dlast);if(drecent.length>10)drecent.shift();return DQ[dlast]}
   function autoShow(){if(amode!=='auto'||!bm)return;var m=dnext();var go=function(){if(amode!=='auto')return;bshow(m)};bm.hidden?go():bhide(go)}
-  function autoTick(){clearTimeout(at);if(amode!=='auto')return;if(!document.hidden)autoShow();at=setTimeout(autoTick,3000)}
+  function autoTick(){clearTimeout(at);if(amode!=='auto')return;if(!document.hidden)autoShow();at=setTimeout(autoTick,3500)}
   function autoPause(mode){amode=mode;clearTimeout(at);clearTimeout(ast);clearTimeout(bt);if(bm){bm.hidden=true;bm.classList.remove('pop','out')}}
   function autoResume(){if(amode==='auto')return;amode='auto';clearTimeout(at);clearTimeout(ast);ast=setTimeout(autoTick,900)}
   if(bm)ast=setTimeout(autoTick,1800);
