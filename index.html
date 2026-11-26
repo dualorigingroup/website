@@ -289,12 +289,6 @@ main,.wrap,.copy{display:contents}
   .spill u{animation-name:plumeD!important}
 }
 @keyframes plumeD{0%{transform:translate(var(--sx),20px) scale(.4,.35);opacity:0}18%{opacity:var(--o)}55%{transform:translate(calc(var(--sx) + var(--dx)*.25),-4vh) scale(.6,.55) skewX(calc(var(--k)*1deg));opacity:calc(var(--o)*.7)}100%{transform:translate(calc(var(--sx) + var(--dx)*.5),-9vh) scale(.8,.7) skewX(calc(var(--k)*-1.2deg));opacity:0}}
-/* ===== converging beans: coffee beans drift in from both edges and recede toward one point (between text and cup), behind everything ===== */
-#stream{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-#stream i{position:absolute;left:0;top:0;width:var(--s);height:calc(var(--s)*1.15);margin:calc(var(--s)*-.575) 0 0 calc(var(--s)*-.5);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-28 -32 56 64'%3E%3Cpath d='M0-30C17-30 26-14 26 0S17 30 0 30-26 14-26 0-17-30 0-30z' fill='%23C8692A'/%3E%3Cpath d='M0-26C-8-14 8-6 0 2S-8 18 0 26' fill='none' stroke='%23FAF6F0' stroke-width='4.5' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;will-change:transform,opacity}
-#stream i.dk{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-28 -32 56 64'%3E%3Cpath d='M0-30C17-30 26-14 26 0S17 30 0 30-26 14-26 0-17-30 0-30z' fill='%232E211A'/%3E%3Cpath d='M0-26C-8-14 8-6 0 2S-8 18 0 26' fill='none' stroke='%23FAF6F0' stroke-width='4.5' stroke-linecap='round'/%3E%3C/svg%3E");filter:invert(.85) sepia(.3)}
-h1,.tag,.mugwrap{position:relative;z-index:1}
-@media (prefers-reduced-motion:reduce){#stream{display:none}}
 /* ===== phone in "request desktop site" mode: the two-column desktop page on a 1440x900 canvas, scaled to fit and centred ===== */
 html.dm{overflow:hidden;background:var(--bg)}
 html.dm body{position:fixed!important;left:50%;top:50%;width:1440px;height:900px;min-height:0!important;margin:0!important;transform:translate(-50%,-50%) scale(var(--dmk,.68));
@@ -384,22 +378,5 @@ html.dm .spill u{animation-name:plumeDM!important}
     document.addEventListener('visibilitychange',function(){if(document.hidden)return;if(ureload)utry();else if(Date.now()-ulast>60000)ucheck()});}
 })();
 </script>
-<div id="stream" aria-hidden="true"></div>
-<script>(function(){/* converging beans: one bean every ~1.4s from a random edge, max 10, 12-16s each, paused while the tab is hidden */
-if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-var L=document.getElementById('stream'),cup=document.querySelector('.cupbox'),tag=document.querySelector('.tag');if(!L||!cup||!tag||!L.animate)return;
-function sc(r){if(!document.documentElement.classList.contains('dm'))return r;var b=document.body.getBoundingClientRect(),k=b.width/1440;return {left:(r.left-b.left)/k,right:(r.right-b.left)/k,top:(r.top-b.top)/k,bottom:(r.bottom-b.top)/k,width:r.width/k,height:r.height/k}}
-function vp(){var c=sc(cup.getBoundingClientRect()),t=sc(tag.getBoundingClientRect());
-  if(c.left>t.right)return [(t.right+c.left)/2,c.top+c.height*.45];
-  return [vw()/2,(t.bottom+c.top+c.height*.04)/2]}
-function dm(){return document.documentElement.classList.contains('dm')}function vw(){return dm()?1440:innerWidth}function vh(){return dm()?900:innerHeight}
-function spawn(){if(document.hidden||L.children.length>=10)return;
-  var W=vw(),H=vh(),left=Math.random()<.5,v=vp(),s=Math.round(18+Math.random()*18),
-      x0=left?-s:W+s,y0=H*(.08+Math.random()*.84),ang=Math.random()*120-60,spin=(Math.random()<.5?-1:1)*(140+Math.random()*220),d=12000+Math.random()*4000;
-  var i=document.createElement('i');if(Math.random()<.35)i.className='dk';i.style.setProperty('--s',s+'px');L.appendChild(i);
-  i.animate([{transform:'translate('+x0+'px,'+y0+'px) rotate('+ang+'deg) scale(1.15)',opacity:0},{opacity:.45,offset:.12},{opacity:.34,offset:.7},
-    {transform:'translate('+v[0]+'px,'+v[1]+'px) rotate('+(ang+spin)+'deg) scale(.08)',opacity:0}],{duration:d,easing:'cubic-bezier(.3,.45,.45,1)',fill:'forwards'}).onfinish=function(){i.remove()}}
-setInterval(spawn,1400);for(var k=0;k<3;k++)setTimeout(spawn,k*400);
-})();</script>
 </body>
 </html>
